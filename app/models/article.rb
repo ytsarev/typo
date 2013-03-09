@@ -416,6 +416,11 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
+  def merge_with other_article_id
+    other_article = Article.find other_article_id
+    self.body += other_article.body
+  end
+
   protected
 
   def set_published_at
