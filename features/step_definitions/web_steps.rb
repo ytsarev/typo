@@ -68,7 +68,7 @@ When /I fill in merge field with (.+) article id/ do |title|
 end
 
 Then /^I should see the content of both (.+) and (.+)$/ do |body1, body2|
-  text = find("#article__body_and_extended_editor").text
+  text = find_field("article__body_and_extended_editor").value
   text.should == body1 + body2 
 end
 
