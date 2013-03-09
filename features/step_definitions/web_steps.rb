@@ -91,6 +91,16 @@ Then /^I should see the content of both (.+) and (.+)$/ do |body1, body2|
   text.should == body1 + body2 
 end
 
+And /^I created (.+) comment for (.+) article$/ do |comment, article|
+  visit '/'
+  click_on article
+  fill_in 'comment_author', :with => "Spammer"
+  fill_in 'comment_email', :with => "joe@doe.com"
+  fill_in 'comment_url', :with => "doe.com"
+  fill_in 'comment_body', :with => comment
+  click_button 'comment'
+end
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
