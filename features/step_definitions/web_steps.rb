@@ -55,6 +55,23 @@ And /^I am logged into the admin panel$/ do
   end
 end
 
+And /^I created (.*) article with (.*) content/ do |title, body|
+  visit '/admin/content/new'
+  fill_in "article_title", :with => title
+  fill_in "article__body_and_extended_editor", :with => body
+  click_button "Publish"
+end
+
+When /I fill in merge field with (.+) article id/ do |title|
+  article = Article.find_by_title title
+  fill_in 'merge_with', :with => article.id
+end
+
+Then /^I should see the content of both (.+) and (.+)$/ do |body1, body2|
+  text = find("#article__body_and_extended_editor").text
+  text.should == body1 + body2 
+end
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
