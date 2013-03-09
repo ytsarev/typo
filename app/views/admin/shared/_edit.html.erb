@@ -5,11 +5,13 @@
 
 <% end %>
 
-<div class='merge'>
-  <h4><%= _("Merge Articles") %></h4>
-  <%= form_tag "/admin/content/merge/#{@article.id}" do -%>
-    <%= label :merge, :id, "Article id" %>
-    <%= text_field :merge, :id, :name => 'merge_with' %>
-    <%= submit_tag "Merge" %>
-  <% end -%>
-</div>
+<% if current_user.profile_id == 1 %>
+  <div class='merge'>
+    <h4><%= _("Merge Articles") %></h4>
+    <%= form_tag "/admin/content/merge/#{@article.id}" do -%>
+      <%= label :merge, :id, "Article id" %>
+      <%= text_field :merge, :id, :name => 'merge_with' %>
+      <%= submit_tag "Merge" %>
+    <% end -%>
+  </div>
+<% end %>
