@@ -14,6 +14,8 @@ Feature: Merge Articles
     When I fill in merge field with "Merge2" article id
     And I press "Merge"
     Then I should see the content of both "OLOLO1" and "LOLOLO2" 
+    Given I am on the admin content page
+    Then I should not see "Merge2"
 
   Scenario:
     Given I am logged into the user panel
