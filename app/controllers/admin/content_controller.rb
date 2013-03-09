@@ -117,7 +117,7 @@ class Admin::ContentController < Admin::BaseController
     main_article = Article.find params[:id]
     main_article.merge_with params[:merge_with]
     main_article.save
-    redirect_to :action => 'index'
+    redirect_to :action => "edit", :id => params[:id]
   end
 
   protected
