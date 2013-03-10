@@ -114,9 +114,17 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge
-    main_article = Article.find params[:id]
-    main_article.merge_with params[:merge_with]
-    main_article.save
+    unless params[:id] == params[:merge_with]
+      main_article = Article.find params[:id]
+      main_article = main_article.merge_with params[:merge_with]
+      if main_article
+        main_article.save
+      else
+        flash[:error] = _('There merging article does not exist.')
+      end
+    else
+      flash[:error] = _('The merging id is the same as the main article.')
+    end
     redirect_to :action => "edit", :id => params[:id]
   end
 

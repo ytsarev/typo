@@ -21,8 +21,14 @@ Feature: Merge Articles
     And I follow "Merge1"
     Then I should see "LULZ"
 
-  Scenario:
+  Scenario: Unprivileged user should se no merge
     Given I am logged into the user panel
     And I created "User1" article with "TROLOLO1" content
     Given I am on the "User1" article edit page
     Then I should not see "Merge"
+
+  Scenario: Merge should not be available for new articles
+    Given I am logged into the admin panel
+    And I follow "New Article"
+    Then I should not see "Merge"
+ 
