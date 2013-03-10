@@ -101,6 +101,14 @@ And /^I created (.+) comment for (.+) article$/ do |comment, article|
   click_button 'comment'
 end
 
+When /^I create new "(.*?)" category$/ do |title|
+  fill_in 'category_name', :with => title 
+  fill_in 'category_keywords', :with => "key1 key2 key3"
+  fill_in 'category_description', :with => "This is just a test category"
+  click_button 'Save'
+end
+
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
