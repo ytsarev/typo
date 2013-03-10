@@ -1,14 +1,8 @@
 <% @page_heading = _("Categories") %>
 
 <div class='left_form'>
-  <% if @category.persisted? 
-       action = "edit"
-       id = @category.id
-     else
-       action = "new" 
-       id = nil
-     end%>
-  <%= form_tag :action=> action, :id => id do %>
+  <% id = @category.id if @category.persisted? %>
+  <%= form_tag :action=> "edit", :id => id do %>
   <%= error_messages_for 'category' %>
   <div class='clearfix'>
     <label for="category_name"><%= _("Name")%></label>
