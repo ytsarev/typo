@@ -6,8 +6,14 @@ Feature: Create Categories
   Background:
     Given the blog is set up
     And I am logged into the admin panel
+    When I follow "Categories"
 
   Scenario: Successfully create category
-    When I follow "Categories"
-    And I create new "TestCategory1" category
+    When I create new "TestCategory1" category
     Then I should see "TestCategory1"
+
+  Scenario: Successfully edit category
+    When I create new "TestCategory2" category
+    And I follow "TestCategory2"
+    And change category description to "Changed description !!!"
+    Then I should see "Changed description !!!"

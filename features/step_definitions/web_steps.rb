@@ -108,6 +108,10 @@ When /^I create new "(.*?)" category$/ do |title|
   click_button 'Save'
 end
 
+When /^change category description to "(.*?)"$/ do |description|
+  fill_in 'category_description', :with => description
+  click_button 'Save'
+end
 
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
