@@ -28,8 +28,11 @@ class Admin::CategoriesController < Admin::BaseController
     if params[:id]
       @category = Category.find(params[:id])
       @category.attributes = params[:category]
+    else
+      @category = Category.new
     end
     if request.post?
+      @category.attributes = params[:category]
       respond_to do |format|
         format.html { save_category }
         format.js do 
@@ -45,10 +48,10 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def save_category
-    if @category.save!
+    if @category.save
       flash[:notice] = _('Category was successfully saved.')
     else
-      flash[:error] = _('Category could not be saved.')
+      flash[:error] = @category.errors.full_messages.to_sentence
     end
     redirect_to :action => 'new'
   end
